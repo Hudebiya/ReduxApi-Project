@@ -1,34 +1,14 @@
 import React from 'react'
-import { fetchPhotos, fetchVideos, fetchGifs } from './api/mediaApi'
-
+import SearchBar from './components/SearchBar'
+ import Tabs from './components/Tabs'
+import ResultGrid from './components/ResultGrid'
 const App = () => {
 
-    function getPhotos() {
-       fetchPhotos()
-    }
   return (
     <div className="h-screen w-full bg-amber-200 text-black">
-        <button className="bg-amber-800 px-4 py-3 m-5" onClick={async ()=> {
-          const data = await fetchPhotos('cat')
-
-           console.log(data);
-
-        }}> Get Photos</button>
-
-        <button className="bg-amber-800 px-4 py-3 m-5" onClick={async ()=> {
-          const data = await fetchVideos('dog')
-
-           console.log(data);
-
-        }}> Get Videos</button>
-
-        <button className="bg-amber-800 px-4 py-3 m-5" onClick={async ()=> {
-          const data = await fetchGifs('dog')
-
-           console.log(data);
-
-        }}> Get GIFs</button>
-
+      <SearchBar />
+      <Tabs />
+      <ResultGrid/>
     </div>
   )
 }
