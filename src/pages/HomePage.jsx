@@ -9,7 +9,7 @@ const HomePage = () => {
   const dispatch = useDispatch()
   const activeTab = useSelector((store) => store.search.activeTab)
 
-  const links = ['photos', 'videos', 'gifs', 'saved']
+  const links = ['photos', 'videos', 'gifs']
 
   return (
     <div className='min-h-screen'>

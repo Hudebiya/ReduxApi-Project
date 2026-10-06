@@ -1,12 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify' // ✅ 1. Import ko yahan top par shift kar diya
+import { toast } from 'react-toastify'
 import {
   addToCollection,
   removeFromCollection,
 } from '../redux/features/collectionSlice'
 
-const ResultCard = ({ item }) => {
+const ResultCard = ({ item, inCollection = false }) => { // NEW: inCollection prop
   const dispatch = useDispatch()
   const saved = useSelector((store) =>
     store.collection.items.some((i) => i.id === item.id)
@@ -16,12 +16,10 @@ const ResultCard = ({ item }) => {
     const oldData = JSON.parse(localStorage.getItem('collection')) || []
     let newData
 
-    // ✅ 2. Yahan se 'import' wali line hata di gayi hai
-
     if (saved) {
       newData = oldData.filter((i) => i.id !== item.id)
       dispatch(removeFromCollection(item.id))
-      toast.info('Removed from collection')
+      toast.info(inCollection ? 'Deleted from collection' : 'Removed from collection') // NEW
     } else {
       newData = [...oldData, item]
       dispatch(addToCollection(item))
@@ -81,15 +79,18 @@ const ResultCard = ({ item }) => {
             {item.source}
           </a>
 
+          {/* NEW: button collection page par Delete ban jata hai */}
           <button
             onClick={saveHandler}
             className={`flex-1 active:scale-95 transition cursor-pointer px-3 py-2 rounded-full text-xs font-semibold ${
-              saved
+              inCollection
+                ? 'bg-red-600 hover:bg-red-500 text-white'
+                : saved
                 ? 'bg-green-600 text-white'
                 : 'bg-stone-900 hover:bg-stone-800 text-amber-300'
             }`}
           >
-            {saved ? 'Saved ✓' : 'Save'}
+            {inCollection ? 'Delete' : saved ? 'Saved ✓' : 'Save'}
           </button>
         </div>
       </div>

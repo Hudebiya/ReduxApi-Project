@@ -10,10 +10,9 @@ const SearchBar = () => {
   const count = useSelector((store) => store.collection.items.length)
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(setQuery(text))
-    setText('')
-  }
+  e.preventDefault()
+  dispatch(setQuery(text.trim()))
+}
 
     return (
   <form onSubmit={submitHandler} className='flex gap-3 px-10 pt-10'>

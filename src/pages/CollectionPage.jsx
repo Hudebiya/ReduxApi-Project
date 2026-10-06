@@ -45,12 +45,12 @@ const CollectionPage = () => {
       <main className='max-w-7xl mx-auto'>
         {items.length == 0 ? (
           <p className='px-10 py-20 text-center text-stone-600'>
-            Abhi kuch save nahi kiya. Search karke kisi card par Save dabayein.
+            Nothing Saved ...
           </p>
         ) : (
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-10'>
             {items.map((item) => (
-              <ResultCard key={item.id} item={item} />
+              <ResultCard key={item.id} item={item} inCollection={true}/>
             ))}
           </div>
         )}
